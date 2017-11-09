@@ -25,22 +25,21 @@ import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
     public Context context;
-    String str[];
     public boolean check1[];
-    ArrayList<String> pic_url;
+    ArrayList<String> pic_url ;
+    ArrayList<String> name ;
 
-    public  MyAdapter(Context context, String str[], ArrayList<String> pic_url) {
+    public  MyAdapter(Context context,ArrayList<String> name  , ArrayList<String> pic_url) {
         this.context = context;
-        this.str = str;
+        this.name = name;
         this.pic_url=pic_url;
-        check1 = new boolean[str.length];
-        Log.d("Zoo",pic_url.toString());
+        check1 = new boolean[name.size()];
     }
 
     @Override
     public int getCount() {
 
-        return str.length;
+        return pic_url.size();
     }
 
     @Override
@@ -77,12 +76,12 @@ public class MyAdapter extends BaseAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, str[position], Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, str[position], Toast.LENGTH_SHORT).show();
                 }
             });
-            tv.setText("This is No " + str[position]);
+            tv.setText("This is No " + name.get(position));
 
-        Picasso.with(context).load(pic_url.get(position)).into(img);
+        Picasso.with(context).load(pic_url.get(position)).resize(50, 50).centerCrop().into(img);
         return convertView;
     }
 }

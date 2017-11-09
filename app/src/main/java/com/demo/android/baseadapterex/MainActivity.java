@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
-    String names[] = {"A", "B", "C", "D", "E"};
+    ArrayList<String> mylist1 = new ArrayList<>();
     MyAdapter adapter;
     Zoo z;
     ArrayList<String> mylist = new ArrayList<>();
@@ -43,12 +43,18 @@ public class MainActivity extends AppCompatActivity {
                         z = gson.fromJson(response, Zoo.class);
 
                         Log.d("TEST", z.result.results[1].E_Name);
-                        Log.d("TEST", z.result.results[0].E_Name);
                         Log.d("TEST", z.result.results[0].E_Pic_URL);
+                        Log.d("TEST", "Length :"+ z.result.results.length);
                         for (int i=0;i<z.result.results.length;i++)
                         {
+                            Log.d("TEST", "ADD :"+ z.result.results[i].E_Pic_URL);
                             mylist.add(z.result.results[i].E_Pic_URL);
+                            mylist1.add(z.result.results[i].E_Name);
                         }
+
+                        adapter = new MyAdapter(MainActivity.this, mylist1,mylist);
+                        Log.d("TEST","Size"+mylist.size());
+                        listView.setAdapter(adapter);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -60,9 +66,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(request);
         queue.start();
 
-        adapter = new MyAdapter(MainActivity.this, names,mylist);
 
-        listView.setAdapter(adapter);
 
     }
 
@@ -77,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         if (item.getItemId() == R.id.menu_check) {
 
-
-            int i;
-            for (i = 0; i < names.length; i++) {
-                if (adapter.check1[i]) {
-                    sb.append(names[i] + ",");
-                }
-            }
+//
+//            int i;
+//            for (i = 0; i < mylist1.size(); i++) {
+//                if (adapter.check1[i]) {
+//                    sb.append(names[i] + ",");
+//                }
+//            }
         }
         Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
         return super.onOptionsItemSelected(item);
