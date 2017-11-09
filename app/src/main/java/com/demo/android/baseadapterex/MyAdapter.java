@@ -80,6 +80,7 @@ public class MyAdapter extends BaseAdapter {
                 }
             });
             tv.setText("This is No " + name.get(position));
+        //
 
         Picasso.with(context).load(pic_url.get(position)).resize(50, 50).centerCrop().into(img);
         return convertView;
