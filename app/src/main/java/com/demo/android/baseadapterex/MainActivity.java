@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         StringBuilder sb = new StringBuilder();
         if (item.getItemId() == R.id.menu_check) {
-
+//
 //
 //            int i;
 //            for (i = 0; i < mylist1.size(); i++) {
